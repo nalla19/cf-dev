@@ -1,0 +1,36 @@
+<cfif session.user.G_LG is "_EN">
+	<cfset lang = 0>
+<cfelse>
+	<cfset lang = 1>
+</cfif>
+
+
+<CFQUERY NAME="qGetTopCandidates" DATASOURCE="#Session.DB.DSN#" DBTYPE="ODBC" 
+         USERNAME="#Application.ini.CAAR.X_USR#" PASSWORD="#Application.ini.CAAR.X_PWD#">
+  EXEC EC_DashboardGetTopCandidates <cfqueryparam value="#svar.DomainID#" CFSQLTYPE="CF_SQL_INTEGER">,
+                                    <cfqueryparam value="#Uname#" CFSQLTYPE="CF_SQL_VARCHAR" maxLength="15">
+</CFQUERY>    
+			    				
+
+<table border="0" cellpadding="3" cellspacing="3" width="100%">
+	<tbody>
+		<CFIF qGetTopCandidates.recordcount gt 0>
+			<cfloop query = "qGetTopCandidates">
+	       		<tr>
+	       			<CFOUTPUT>
+	            	<td width="50%"><a href="javascript:top.$('##Tab_JCM-off a').trigger('click');top.initWRS.manageNav();javascript:top._v6_mClickTopFrame2('jc_view_myjobs','1','/cb/RC/jobmngr/JobTreeview.htm?JobType=mine&selectedcandidate=#qGetTopCandidates.MessageLink#','_v6_single','','','','');">#qGetTopCandidates.CandLastName#, #qGetTopCandidates.CandFirstName#</a></td>
+	            	<td width="35%"><a href="javascript:top.$('##Tab_JCM-off a').trigger('click');top.initWRS.manageNav();top._v6_mClickTopFrame2('jc_view_myjobs','1','/cb/RC/jobmngr/JobTreeview.htm?JobType=mine&job_no=#qGetTopCandidates.JobNumber#','_v6_single','','','','');">#qGetTopCandidates.JobNumber#</a></td>
+	                <td width="10%">#qGetTopCandidates.Skills#</td>
+	                <cfif qGetTopCandidates.recordcount lt 10>
+						<td>&nbsp;</td>
+					</cfif>
+					</CFOUTPUT>
+				</tr>
+			</cfloop>
+		<CFELSE>
+			<tr>
+				<td colspan="4" style="width: #portletWidth#px;"><cfoutput>#GetString("noCandidateFound")#</cfoutput></td>
+			</tr>		
+		</CFIF>                            
+	</tbody>
+</table>

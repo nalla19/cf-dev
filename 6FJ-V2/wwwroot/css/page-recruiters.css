@@ -1,0 +1,384 @@
+.hero-unit {
+<<<<<<< HEAD
+  min-height: 0;
+}
+.hero-unit .lead {
+  font-size: 20px;
+}
+.hero-unit .btn-wrap {
+  height: 160px;
+  padding-top: 80px;
+  background: url(../img/hero-recruiters.png) 50% 0 no-repeat;
+}
+.hero-unit .btn {
+  display: inline;
+  width: 90%;
+}
+
+.section h2, .section .first {
+  text-align: center;
+}
+
+.hero-unit .btn-wrap, .page-header .btn-wrap {
+  text-align: right;
+}
+
+.btn-wrap {
+  text-align: center;
+}
+
+.chart {
+  padding-top: 20px;
+}
+
+.chart-legend {
+  /* chart legend list */
+}
+.chart-legend li {
+  padding: 10px 0;
+  border-bottom: 1px solid #e0e0dd;
+}
+.chart-legend em {
+  color: #707070;
+  font-style: normal;
+}
+.chart-legend .bullet {
+  width: 14px;
+  height: 14px;
+  border-radius: 14px;
+  line-height: 14px;
+  display: block;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.it .bullet {
+  background: #87be00;
+}
+
+.mgt .bullet {
+  background: #371757;
+}
+
+.biz .bullet {
+  background: #963ab9;
+}
+
+.bythenumbers {
+  margin-top: 50px;
+}
+.bythenumbers small {
+  font-size: 14px;
+  font-style: italic;
+  color: #707070;
+}
+
+.companies {
+  border-top: 1px solid #e0e0dd;
+  margin-top: 50px;
+  padding-top: 30px;
+}
+.companies h2 {
+  font-size: 20px;
+  margin-bottom: 30px;
+}
+=======
+  min-height: 0; }
+  .hero-unit .lead {
+    font-size: 20px; }
+  .hero-unit .btn-wrap {
+    height: 240px;
+    padding-top: 80px;
+    background: url(../img/hero-recruiters.png) 50% 0 no-repeat; }
+
+.section h2, .section .first {
+  text-align: center; }
+
+.hero-unit .btn-wrap, .page-header .btn-wrap {
+  text-align: right; }
+
+.btn-wrap {
+  text-align: center; }
+
+.chart {
+  padding-top: 20px; }
+
+.chart-legend {
+  /* chart legend list */ }
+  .chart-legend li {
+    padding: 6px 0;
+    border-bottom: 1px solid #e0e0dd; }
+  .chart-legend em {
+    color: #707070;
+    font-style: normal; }
+  .chart-legend .bullet {
+    width: 14px;
+    height: 14px;
+    border-radius: 14px;
+    line-height: 14px;
+    display: block;
+    display: inline-block;
+    margin-right: 5px; }
+
+.it .bullet {
+  background: #87c31d; }
+
+.mgt .bullet {
+  background: #6a9914; }
+
+.biz .bullet {
+  background: #9a2cba; }
+
+.fin .bullet {
+  background: #4e327e; }
+
+.man .bullet {
+  background:#380e56; }
+ 
+.companies {
+  border-top: 1px solid #e0e0dd;
+  margin-top: 50px;
+  padding-top: 30px; }
+  .companies h2 {
+    font-size: 20px;
+    margin-bottom: 30px; }
+>>>>>>> c6c06d6dc3800a06e084ef03a407d8e9a398e7de
+
+.icn {
+  margin: 30px auto 20px;
+  background: #87be00 url(../img/icon-recruiters.png) 0 0 no-repeat;
+  border: 6px solid white;
+  width: 114px;
+  height: 114px;
+  border-radius: 114px;
+  line-height: 114px;
+<<<<<<< HEAD
+  display: block;
+}
+
+.icn-access {
+  background-position: -114px 0;
+}
+
+.icn-contact {
+  background-position: -228px 0;
+}
+
+.icn-postings {
+  background-position: 0 -114px;
+}
+
+.icn-talent {
+  background-position: -114px -114px;
+}
+
+/* Recruiters Page only */
+.page-recruiters .chart-legend {
+  margin-top: 40px;
+}
+
+/* Branding Subpage */
+.icn-recruitment {
+  background-position: -228px -114px;
+}
+
+.icn-advertising {
+  background-position: -228px -228px;
+}
+
+.icn-profile {
+  background-position: 0 -228px;
+}
+
+.icn-alerts {
+  background-position: -114px -228px;
+}
+
+.icn-tweeting {
+  background-position: -342px -228px;
+}
+
+.benefits ul {
+  margin-bottom: 40px;
+}
+.benefits .icn {
+  margin-top: 10px;
+}
+
+.page-branding .btn-wrap, .page-features .btn-wrap, .page-demographics .btn-wrap {
+  margin-top: 80px;
+}
+=======
+  display: block; }
+
+.icn-access {
+  background-position: -114px 0; }
+
+.icn-contact {
+  background-position: -228px 0; }
+
+.icn-postings {
+  background-position: 0 -114px; }
+
+.icn-talent {
+  background-position: -114px -114px; }
+
+
+
+/* Branding Subpage */
+.icn-recruitment {
+  background-position: -228px -114px; }
+
+.icn-advertising {
+  background-position: -228px -228px; }
+
+.icn-profile {
+  background-position: 0 -228px; }
+
+.icn-jobpostbrand {
+  background-position: -563px 0; }
+
+.icn-homepage {
+  background-position: -563px -115px; }
+  
+.icn-jobsearchpages {
+  background-position: -458px 0; }
+
+.icn-blog {
+  background-position: -455px -112px; }
+
+.icn-newsletter {
+  background-position: -455px -228px; }
+
+.icn-featuredcompanyprofile {
+  background-position: -346px 0; }
+      
+.icn-spotlightqa {
+  background-position: -346px -115px; }
+
+.icn-socialmedia {
+  background-position: -342px -232px; }
+
+.benefits ul {
+  margin-bottom: 40px; }
+.benefits .icn {
+  margin-top: 10px; }
+
+.page-branding .btn-wrap, .page-features .btn-wrap, .page-demographics .btn-wrap {
+  margin-top: 80px; }
+>>>>>>> c6c06d6dc3800a06e084ef03a407d8e9a398e7de
+
+/* Features Subpage */
+.page-features .page-header {
+  border: none;
+<<<<<<< HEAD
+  padding-bottom: 0;
+}
+.page-features .page-title, .page-features .page-subtitle {
+  margin-bottom: 0;
+}
+.page-features .section {
+  padding-top: 20px;
+}
+.page-features h2 {
+  font-size: 20px;
+  line-height: 24px;
+  text-align: left;
+}
+
+/* Demographics Subpage */
+.page-demographics .quicklinks li {
+  font-size: 16px;
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+.page-demographics .quicklinks a {
+  display: block;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #f6f6f3;
+}
+.page-demographics .quicklinks a:hover, .page-demographics .quicklinks .active a {
+  border-bottom: 2px solid #e0e0dd;
+}
+.page-demographics .content h2 {
+  text-align: left;
+  margin-top: 0;
+}
+
+.demographic {
+  margin-bottom: 20px;
+}
+.demographic ul {
+  list-style: none;
+=======
+  padding-bottom: 0; }
+.page-features .page-title, .page-features .page-subtitle {
+  margin-bottom: 0; }
+.page-features .section {
+  padding-top: 20px; }
+.page-features h2 {
+  font-size: 20px;
+  line-height: 24px;
+  text-align: left; }
+
+/* Demographics Subpage */
+.demographics h2 {margin-bottom:40px;}
+
+
+.page-demographics .quicklinks li {
+  font-size: 16px;
+  line-height: 1.2;
+  margin-bottom: 20px; }
+.page-demographics .quicklinks a {
+  display: block;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #f6f6f3; }
+.page-demographics .quicklinks a:hover, .page-demographics .quicklinks .active a {
+  border-bottom: 2px solid #e0e0dd; }
+.page-demographics .content h2 {
+  text-align: left;
+  margin-top: 0; }
+  
+.quote {
+	font-size: 17px;
+>>>>>>> c6c06d6dc3800a06e084ef03a407d8e9a398e7de
+}
+
+.btn-download{
+  color:#fff;
+  text-shadow: none;
+  box-shadow: inset 0 1px 0 #9a2cba, 0 1px 2px rgba(0, 0, 0, 0.35);
+  background: #9a2cba; }
+  
+.btn-download:focus, .btn-download:hover, .btn-download:active {
+	color:#fff;
+    background: #9a2cba;
+    background: linear-gradient(#9a2cba, #9a2cba); }	
+	
+@media (max-width: 767px) {
+  /* Phones to tablets */
+  .hero-unit .btn-wrap {
+    text-align: center;
+    background: none;
+    height: auto;
+<<<<<<< HEAD
+    padding-top: 0;
+  }
+
+  .chart {
+    text-align: center;
+  }
+
+  .page-branding .btn-wrap, .page-features .btn-wrap {
+    margin-top: 0;
+  }
+}
+=======
+    padding-top: 0; }
+
+  .chart {
+    text-align: center; }
+
+  .page-branding .btn-wrap, .page-features .btn-wrap {
+    margin-top: 0; } }
+>>>>>>> c6c06d6dc3800a06e084ef03a407d8e9a398e7de

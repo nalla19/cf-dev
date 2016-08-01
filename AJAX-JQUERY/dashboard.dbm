@@ -1,0 +1,30 @@
+<cfif session.user.G_LG is "_EN">
+	<cfset lang = 0>
+<cfelse>
+	<cfset lang = 1>
+</cfif>
+
+
+<!---Check to see if the user has any data in the portletUsers table --->
+<CFQUERY NAME="CheckUserPortlets" DATASOURCE="#Session.DB.DSN#" DBTYPE="ODBC" USERNAME="#Application.ini.CAAR.R_USR#" PASSWORD="#Application.ini.CAAR.R_PWD#">
+SELECT count(*) portletCount FROM dbo.PortletsUsers (nolock) WHERE 1=1  AND userID='#svar.uname#' AND DomainID=#svar.domainID#
+</CFQUERY>
+
+<!---If there are no portlets for this user create them --->
+<CFIF CheckUserPortlets.portletCount is 0>
+	<CFQUERY DATASOURCE="#Session.DB.DSN#" DBTYPE="ODBC" USERNAME="#Application.ini.CAAR.X_USR#" PASSWORD="#Application.ini.CAAR.X_PWD#">
+	EXEC EC_PopulatePortletUser #svar.domainID#, '#svar.uname#'
+	</CFQUERY>	
+</CFIF>
+
+<CFQUERY NAME="userportlets" DATASOURCE="#Session.DB.DSN#" DBTYPE="ODBC" USERNAME="#Application.ini.CAAR.R_USR#" PASSWORD="#Application.ini.CAAR.R_PWD#">
+SELECT users.*, portlets.*
+  FROM dbo.PortletsUsers users
+ INNER JOIN dbo.PortletsAdmin portlets
+    ON users.portletID = portlets.portletID
+ WHERE 1=1
+   AND users.userID='#svar.uname#' 
+   AND users.DomainID=#svar.domainID#
+ ORDER BY users.Portletorder ASC, portlets.PortletID ASC
+</CFQUERY>
+

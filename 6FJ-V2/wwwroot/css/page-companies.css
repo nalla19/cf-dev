@@ -1,0 +1,88 @@
+.page-companies h3 {
+  font-size: 16px;
+<<<<<<< HEAD
+  margin: 20px 0 10px;
+}
+.page-companies section {
+  margin-bottom: 40px;
+}
+.page-companies section h2 {
+  margin-bottom: 20px;
+}
+
+.companies-by-industry {
+  font-size: 14px;
+  list-style: none;
+}
+.companies-by-industry li {
+  margin-bottom: 5px;
+}
+.companies-by-industry a {
+  font-weight: 700;
+}
+
+.all-companies .span2 {
+  margin-bottom: 20px;
+}
+
+.page-company .back {
+  margin-bottom: 10px;
+}
+.page-company .page-title {
+  margin-top: 0;
+}
+.page-company .page-title em {
+  display: block;
+  font-weight: normal;
+}
+.page-company .results-list {
+  margin-top: 30px;
+  padding-top: 30px;
+  border-top: 2px dotted #e0e0dd;
+}
+.page-company .results-list-title {
+  font-size: 20px;
+}
+=======
+  margin: 20px 0 10px; }
+.page-companies section {
+  margin-bottom: 40px; }
+  .page-companies section h2 {
+    margin-bottom: 20px; }
+
+.companies-by-industry {
+  font-size: 14px;
+  list-style: none; }
+  .companies-by-industry li {
+    margin-bottom: 5px; }
+  .companies-by-industry a {
+    font-weight: 700; }
+
+.all-companies .span2 {
+  margin-bottom: 20px; }
+
+.page-company .back {
+  margin-bottom: 10px; }
+.page-company .page-title {
+  margin-top: 0; }
+  .page-company .page-title em {
+    display: block;
+    font-weight: normal; }
+.page-company .results-list {
+  margin-top: 30px;
+  padding-top: 30px;
+  border-top: 2px dotted #e0e0dd; }
+.page-company .results-list-title {
+  font-size: 20px; }
+>>>>>>> c6c06d6dc3800a06e084ef03a407d8e9a398e7de
+
+@media (max-width: 767px) {
+  .all-companies .span2 {
+    width: 48%;
+<<<<<<< HEAD
+    float: left;
+  }
+}
+=======
+    float: left; } }
+>>>>>>> c6c06d6dc3800a06e084ef03a407d8e9a398e7de

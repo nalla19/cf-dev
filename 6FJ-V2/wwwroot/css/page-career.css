@@ -1,0 +1,100 @@
+.page-header {
+  margin-bottom: 0;
+  padding-top: 40px;
+  padding-bottom: 0;
+<<<<<<< HEAD
+  border: none;
+}
+
+.page-title {
+  margin-bottom: 0;
+}
+
+/* Career page */
+.page-career .page-subtitle {
+  margin-bottom: 0;
+}
+
+.careerlinks {
+  padding-top: 0;
+}
+.careerlinks h2 {
+  font-size: 20px;
+  padding-top: 40px;
+}
+
+.subscribe {
+  margin-bottom: 20px;
+}
+
+.join {
+  padding-top: 40px;
+}
+=======
+  border: none; }
+
+.page-title {
+  margin-bottom: 0; }
+
+/* Career page */
+.page-career .page-subtitle {
+  margin-bottom: 0; }
+
+.careerlinks {
+  padding-top: 0; }
+  .careerlinks h2 {
+    font-size: 20px;
+    padding-top: 40px; }
+
+.subscribe {
+  margin-bottom: 20px; }
+
+.join {
+  padding-top: 40px; }
+>>>>>>> c6c06d6dc3800a06e084ef03a407d8e9a398e7de
+
+/* Opportunities page */
+.opp {
+  font-size: 14px;
+  line-height: 18.2px;
+  margin-bottom: 40px;
+  padding-bottom: 40px;
+<<<<<<< HEAD
+  border-bottom: 1px solid #e0e0dd;
+}
+.opp h3 {
+  font-size: 16px;
+}
+.opp li {
+  margin-bottom: 5px;
+}
+=======
+  border-bottom: 1px solid #e0e0dd; }
+  .opp h3 {
+    font-size: 16px; }
+  .opp li {
+    margin-bottom: 5px; }
+>>>>>>> c6c06d6dc3800a06e084ef03a407d8e9a398e7de
+
+.opp-title {
+  font-size: 20px;
+  color: #383838;
+<<<<<<< HEAD
+  margin-top: 0;
+}
+=======
+  margin-top: 0; }
+>>>>>>> c6c06d6dc3800a06e084ef03a407d8e9a398e7de
+
+@media (max-width: 767px) {
+  .careerlink .btn {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+<<<<<<< HEAD
+    max-width: 200px;
+  }
+}
+=======
+    max-width: 200px; } }
+>>>>>>> c6c06d6dc3800a06e084ef03a407d8e9a398e7de

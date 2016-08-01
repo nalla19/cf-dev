@@ -1,0 +1,72 @@
+# Helicon Ape version 3.0.0.76
+
+#for NON PRODUCTION ONLY
+AuthType Basic
+AuthName "Secure Area"
+AuthBasicProvider file
+AuthUserFile C:\secret\.htpasswds
+Require valid-user
+
+
+
+
+RewriteEngine on
+
+
+# Redirect old cfm references
+RewriteRule ^6FigureJobs_AboutUs.cfm /about [R=301,NC,L]
+RewriteRule ^6FigureJobs_Advertise.cfm /advertise [R=301,NC,L]
+RewriteRule ^6FigureJobs_PrivacyStatement.cfm /privacy [R=301,NC,L]
+RewriteRule ^6FigureJobs_TOS.cfm /terms [R=301,NC,L]
+RewriteRule ^6FigureJobs_ContactUs.cfm /terms [R=301,NC,L]
+RewriteRule ^ExecFaqs.cfm /faqs [R=301,NC,L]
+RewriteRule ^CPartners.cfm(.*) /opportunities$1 [R=301,NC,L]
+RewriteRule ^CPartner.cfm(.*) /partner$1 [R=301,NC,L]
+RewriteRule ^ExecViewJob.cfm(.*) /listing$1 [R=301,NC,L]
+
+
+# Does the directory exist in the filesystem?
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Does the file actually exist in the filesystem?
+RewriteCond %{REQUEST_FILENAME} !-f
+
+#rewrite the act
+RewriteRule ^jobs/view/(.*) index.cfm?act=listing&seoJobURL=$1 [L,QSA,NC]
+RewriteRule ^company/(.*) index.cfm?act=company&seoStrCompany=$1 [L,QSA,NC]
+RewriteRule ^autumnspecial(.*) index.cfm?act=package&pid=3 [L,QSA,NC]
+RewriteRule ^winterspecial(.*) index.cfm?act=package&pid=3&s=1 [L,QSA,NC]
+
+
+
+
+# Does the directory exist in the filesystem?
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Does the file actually exist in the filesystem?
+RewriteCond %{REQUEST_FILENAME} !-f
+
+#rewrite the act
+RewriteRule ^jobs/(.*) index.cfm?act=search$1 [L,QSA,NC]
+
+
+
+
+
+
+
+# Allow CFFileServlet requests through since they are Voodoo!
+RewriteCond %{REQUEST_URI} !(?i)^[\\/]CFFileServlet [NC]
+
+# Does the directory exist in the filesystem?
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Does the file actually exist in the filesystem?
+RewriteCond %{REQUEST_FILENAME} !-f
+
+#rewrite the act
+RewriteRule ^(.*) /index.cfm?act=$1 [L,QSA,NC]
+
+
+
+

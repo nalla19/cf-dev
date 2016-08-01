@@ -1,0 +1,136 @@
+body {
+<<<<<<< HEAD
+  background: #e0e0dd;
+}
+
+.hero-unit {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.featured {
+  background: #f6f6f3;
+}
+.featured h2 {
+  margin-bottom: 40px;
+}
+.featured img {
+  display: block;
+}
+.featured a {
+  display: inline-block;
+  margin-right: 20px;
+}
+=======
+  background: #e0e0dd; }
+
+.hero-unit {
+  text-align: left;
+  margin-bottom: 30px; }
+  
+.hero-unit h2{
+	font-size: 34px;
+	color:#FFF
+	}
+.hero-unit .lead2 {
+    color: #aa99ca;
+    font-weight: 500;
+    font-size: 20px;
+    margin-bottom: 30px; }
+
+.hero-unit .has-gray-bullet {
+	font-size:16px;}
+
+.well{
+	text-align: center;}
+
+.offset14 {
+  margin-top:30px;	}
+  
+.help-block2 {
+  font-size: 20px;
+  line-height: 18px;
+  color: #aa99ca; }
+  	
+.featured {
+  background: #f6f6f3; }
+  .featured h2 {
+    margin-bottom: 40px; }
+  .featured img {
+    display: block; }
+  .featured a {
+    display: inline-block;
+    margin-right: 20px; }
+>>>>>>> c6c06d6dc3800a06e084ef03a407d8e9a398e7de
+
+@media (max-width: 767px) {
+  /* Phones to tablets */
+  .featured img {
+    margin-left: auto;
+<<<<<<< HEAD
+    margin-right: auto;
+  }
+
+  .featured-company, .featured-links, .help-block, .lead {
+    text-align: center;
+  }
+}
+@media (max-width: 767px), (min-width: 980px) {
+  .featured .featured-company {
+    float: none;
+  }
+  .featured img {
+    margin-bottom: 0;
+  }
+}
+@media (min-width: 768px) and (max-width: 979px) {
+  .featured-company {
+    margin-top: 10px;
+    margin-bottom: 0;
+  }
+
+  .featured-links {
+    text-align: center;
+  }
+}
+@media (min-width: 980px) {
+  .featured img {
+    margin-bottom: 20px;
+  }
+}
+=======
+    margin-right: auto; }
+	
+	.offset14 {
+	 margin-top:0px;	}
+
+  .featured-company, .featured-links, .help-block, .lead {
+    text-align: center; } }
+@media (max-width: 767px), (min-width: 980px) {
+  .featured .featured-company {
+    float: none; }
+  .featured img {
+    margin-bottom: 0; } }
+@media (min-width: 768px) and (max-width: 979px) {
+  .featured-company {
+    margin-top: 10px;
+    margin-bottom: 0; }
+
+  .featured-links {
+    text-align: center; } }
+@media (min-width: 980px) {
+  .featured img {
+    margin-bottom: 2px; } }
+
+.whiteLogo {
+    background:none;
+    border:0;
+    margin-bottom:0;
+}
+
+#bestInClassCarousel img {display:inline;}
+<<<<<<< HEAD
+
+=======
+>>>>>>> c6c06d6dc3800a06e084ef03a407d8e9a398e7de
+>>>>>>> 878d6f70fbb11fe79be4a547609f8f91254fb22e

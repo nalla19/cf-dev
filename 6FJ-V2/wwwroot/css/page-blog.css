@@ -1,0 +1,134 @@
+.page-title {
+<<<<<<< HEAD
+  margin-bottom: 40px;
+}
+=======
+  margin-bottom: 40px; }
+>>>>>>> c6c06d6dc3800a06e084ef03a407d8e9a398e7de
+
+.hentry {
+  margin: 0 0 40px;
+  padding: 0 0 40px;
+<<<<<<< HEAD
+  border-bottom: 1px solid #e0e0dd;
+}
+
+.entry-header {
+  margin: 0 0 30px;
+}
+.entry-header .entry-title {
+  margin: 0 0 10px;
+}
+
+.entry-meta {
+  font-size: 14px;
+  line-height: 19.2px;
+}
+
+.entry-footer a {
+  margin-right: 20px;
+}
+=======
+  border-bottom: 1px solid #e0e0dd; }
+
+.entry-header {
+  margin: 0 0 30px; }
+  .entry-header .entry-title {
+    margin: 0 0 10px; }
+
+.entry-meta {
+  font-size: 14px;
+  line-height: 19.2px; }
+
+.entry-footer a {
+  margin-right: 20px; }
+>>>>>>> c6c06d6dc3800a06e084ef03a407d8e9a398e7de
+
+.author-bio {
+  font-size: 15px;
+  line-height: 19.5px;
+<<<<<<< HEAD
+  color: #707070;
+}
+.author-bio .avatar {
+  margin: 0 20px 10px 0;
+}
+=======
+  color: #707070; }
+  .author-bio .avatar {
+    margin: 0 20px 10px 0; }
+>>>>>>> c6c06d6dc3800a06e084ef03a407d8e9a398e7de
+
+.entry-highlight {
+  margin: 0 0 20px;
+  padding: 10px;
+  background: #fff;
+<<<<<<< HEAD
+  border: 1px solid #e0e0dd;
+}
+
+.blog-nav {
+  text-align: center;
+}
+.blog-nav .btn {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.comments {
+  margin: 40px 0;
+}
+
+.share li {
+  margin-bottom: 5px;
+}
+
+.widget {
+  margin-bottom: 40px;
+}
+.widget li {
+  margin: 0 0 5px;
+}
+.widget .post-count {
+  font-weight: normal;
+  font-style: italic;
+}
+
+.widget-title {
+  font-size: 16px;
+  margin-top: 0;
+}
+
+.widget-pinterest .image {
+  margin-bottom: 4px;
+}
+=======
+  border: 1px solid #e0e0dd; }
+
+.blog-nav {
+  text-align: center; }
+  .blog-nav .btn {
+    padding-left: 20px;
+    padding-right: 20px; }
+
+.comments {
+  margin: 40px 0; }
+
+.share li {
+  margin-bottom: 5px; }
+
+.widget {
+  margin-bottom: 40px; }
+  .widget li {
+    margin: 0 0 5px; }
+  .widget .post-count {
+    font-weight: normal;
+    font-style: italic; }
+
+.widget-title {
+  font-size: 16px;
+  margin-top: 0; }
+
+.widget-pinterest .image {
+  margin-bottom: 4px; }
+>>>>>>> c6c06d6dc3800a06e084ef03a407d8e9a398e7de

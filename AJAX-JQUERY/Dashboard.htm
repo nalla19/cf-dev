@@ -1,0 +1,502 @@
+<cfsetting showdebugoutput="yes">
+<CFINCLUDE TEMPLATE="/ECConfig/ECIncludes/Com/Secure.dbm">
+<CFSILENT>
+<CFSCRIPT>
+hInfo               = StructNew();
+hInfo.HtmlName      = "Dashboard.htm";
+hInfo.LastTemplate  = "Dashboard.htm";
+hInfo.PageCode      = "RM_Dashboard";
+hInfo.TxtTitle      = "#GetString("Tab_Dashboard")#";
+hInfo.json          = "0";
+</CFSCRIPT>
+</CFSILENT>
+<CFSET HSpace3="&nbsp;&nbsp;&nbsp;" />
+<CFSET HColSpan='colspan="2"' />
+
+<CFINCLUDE TEMPLATE="/ECConfig/ECIncludes/Com/header.dbm">
+
+<BODY class="bodyNoScroll">
+<link rel="stylesheet" href="/cb/stylesheets/bgcolors.css" type="text/css">
+<link rel="stylesheet" href="/cb/stylesheets/dashboard.css" type="text/css">
+<style>
+
+.dbContent.loading {
+    background: rgba( 255, 255, 255, .8 )
+                url('/images/spinner64.gif')
+                50% 50%
+                no-repeat !important;
+}
+
+
+
+</style>
+<script type="text/javascript" src="/tools/scripts/jquery/js/jquery-cookie.js"></script>
+
+<!--->Database Queries--->
+<cfinclude template="dashboard.dbm">
+
+<cfset portletArray = ArrayNew(2)>
+<cfparam name="portletOrder" default="portlet-1,portlet-2,portlet-3,portlet-4,portlet-5,portlet-6">
+
+<cfif userportlets.recordcount gt 0>
+	<cfset portletOrder = "">
+	<cfset portletOrderID = valueList(userportlets.portletID)>
+
+	<cfloop list="#portletOrderID#" index="portletID">
+		<cfset portletOrder = ListAppend(portletOrder, "portlet-#portletID#")>
+	</cfloop>
+
+	<cfquery name="userportlet" dbtype="query">
+    select * from userportlets order by portletID asc
+    </cfquery>
+
+	<cfset arrayIndex = 1>
+	<cfloop query="userportlet">
+		<cfset portletArray[arrayIndex][1] = userportlet.portletID>
+		<cfset portletArray[arrayIndex][2] = userportlet.portletOrder>
+		<cfset portletArray[arrayIndex][3] = userportlet.collapsed>
+		<cfset portletArray[arrayIndex][4] = userportlet.isChart>
+		<cfset portletArray[arrayIndex][5] = userportlet.minimize>
+		<cfset portletArray[arrayIndex][6] = userportlet.portletDesc>
+		<cfset portletArray[arrayIndex][7] = userportlet.portletHeight>
+		<cfset portletArray[arrayIndex][8] = userportlet.portletWidth>
+		<cfset portletArray[arrayIndex][9] = userportlet.portletNameEN>
+		<cfset portletArray[arrayIndex][10] = userportlet.portletNameFR>
+		<cfset portletArray[arrayIndex][11] = userportlet.canClose>
+		<cfset portletArray[arrayIndex][12] = userportlet.position>
+		<cfset portletArray[arrayIndex][13] = userportlet.refresh>
+		<cfset portletArray[arrayIndex][14] = userportlet.reSize>
+		<cfset portletArray[arrayIndex][15] = userportlet.show>
+		<cfset portletArray[arrayIndex][16] = userportlet.status>
+		<cfset portletArray[arrayIndex][17] = userportlet.type>
+		<cfset arrayIndex = arrayIndex + 1>
+	</cfloop>
+	<!---> <cfdump var="#portletArray#"> --->
+</cfif>
+
+
+<script>
+// set the list selector
+var setSelector = "#container";
+// set the cookie name
+var setCookieName = "listOrder";
+// set the cookie expiry time (days):
+var setCookieExpiry = 7;
+var userID = "<cfoutput>#svar.uname#</cfoutput>";
+var domainID = "<cfoutput>#svar.domainID#</cfoutput>";
+var cookie = "<cfoutput>#portletOrder#</cfoutput>";
+</script>
+
+<cfoutput>
+<cfparam name="display" default="display: block;">
+<cfparam name="portletWidth" default="500">
+<cfparam name="portletHeight" default="500">
+
+<!---********************************************
+******START: MAIN CONTAINER FOR THE PORTLETS*****
+*********************************************--->
+<div id="container" style="text-align: center;" class="ui-sortable">
+    <!---Start: Portlet-1 (Reminder Due)--->
+	<cfset portletId 			= portletArray[1][1]>
+	<cfset portletMaxHeight		= portletArray[1][7]>
+	<cfset portletCotentHeight 	= portletArray[1][7] - 75>
+	<cfset portletWidth 		= portletArray[1][8]>
+
+	<cfif lang is 0>
+		<cfset portletTitle 		= portletArray[1][9]>
+		<cfset portletToolTip		= portletArray[1][9]>
+	<cfelse>
+		<cfset portletTitle 		= portletArray[1][10]>
+		<cfset portletToolTip		= portletArray[1][10]>
+	</cfif>
+
+	<cfset portletStatus        = portletArray[1][16]>
+
+	<cfif portletStatus is 'O'>
+		<cfset display 		 = "display: block;">
+		<cfset displayHeadR	 = "display: block;">
+		<cfset portletHeight = portletMaxHeight>
+	<cfelse>
+		<cfset display 		 = "display: none;">
+		<cfset displayHeadR	 = "display: none;">
+		<cfset portletHeight = "35">
+	</cfif>
+
+	<div class="portlet column" id="portlet-#portletId#" style="width: #portletWidth#px; vertical-align:top;">
+		<div class="portletContent" style="height:#portletHeight#px;" id="common_tasks_portlet_00#portletId#">
+		    <div id="common_tasks_portlet_00#portletId#_header" class="portletHeader">
+                <div class="portletTitle" title="#portletTitle#" tooltip="#portletToolTip#" portletid="common_tasks_portlet_00#portletId#">#portletTitle#</div>
+				<div class="portletButtons" portletid="common_tasks_portlet_00#portletId#">
+					<div class="buttonSet" id="common_tasks_portlet_00#portletId#_buttonSet" portletid="common_tasks_portlet_00#portletId#">
+						<cfif portletStatus is 'O'>
+							<div class="minimizeButton buttonPortlet" eventaction="minimizeEvent" title="Minimize" portletid="common_tasks_portlet_00#portletId#" onClick="minimizeMaximize(this, #portletId#, #portletMaxHeight#);"></div>
+						<cfelseif portletStatus is 'C'>
+							<div class="maximizeButton buttonPortlet" eventaction="minimizeEvent" title="Maximize" portletid="common_tasks_portlet_00#portletId#" onClick="minimizeMaximize(this, #portletId#, #portletMaxHeight#);"></div>
+						</cfif>
+					</div>
+				</div>
+            </div>
+
+			<div class="portletBody" style="height: 25px; width: #portletWidth#px; #displayHeadR# overflow:hidden;" id="portletHeaderRow-#portletId#">
+            	<table border="0" cellpadding="3" cellspacing="3" width="#portletWidth#px;" id="portletHeaderRow2-#portletId#">
+	    			<thead>
+						<tr style="font-weight:bold; text-align: left;">
+					        <td width="35%">#GetString("message")#</td>
+                            <td width="25%">#GetString("candidate")#</td>
+							<td width="25%">#GetString("DateDue")#</td>
+							<td width="20%">#GetString("Recipient")#</td>
+					        <td>&nbsp;&nbsp;&nbsp;</td>
+					  	</tr>
+				    </thead>
+				</table>
+			</div>
+
+            <div class="portletBody remindersDB dbContent" data-url="Dashboard_Reminders.htm" style="height:#portletCotentHeight#px;#display# text-align: left; padding-left: 10px;" id="portletBody-#portletId#">
+
+            </div>
+		    <div class="portletFooter"></div>
+		</div>
+    </div>
+	<!---End: Portlet-1 (Reminder Due)--->
+
+	<!---Start: Portlet-2 (New Notes)--->
+	<cfset portletId 			= portletArray[2][1]>
+	<cfset portletMaxHeight		= portletArray[2][7]>
+	<cfset portletCotentHeight 	= portletArray[2][7] - 75>
+	<cfset portletWidth 		= portletArray[2][8]>
+
+	<cfif lang is 0>
+		<cfset portletTitle 		= portletArray[2][9]>
+		<cfset portletToolTip		= portletArray[2][9]>
+	<cfelse>
+		<cfset portletTitle 		= portletArray[2][10]>
+		<cfset portletToolTip		= portletArray[2][10]>
+	</cfif>
+
+	<cfset portletStatus        = portletArray[2][16]>
+
+	<cfif portletStatus is 'O'>
+		<cfset display 		 = "display: block;">
+		<cfset displayHeadR	 = "display: block;">
+		<cfset portletHeight = portletMaxHeight>
+	<cfelse>
+		<cfset display 		 = "display: none;">
+		<cfset displayHeadR	 = "display: none;">
+		<cfset portletHeight = "35">
+	</cfif>
+
+	<div class="portlet column" id="portlet-#portletId#" style="width: #portletWidth#px; vertical-align:top;">
+        <div class="portletContent" style="height: #portletHeight#px;" id="common_tasks_portlet_00#portletId#">
+			<div id="common_tasks_portlet_00#portletId#_header" class="portletHeader">
+                <div class="portletTitle" title="#portletTitle#" tooltip="#portletToolTip#" portletid="common_tasks_portlet_00#portletId#">#portletTitle#</div>
+				<div class="portletButtons" portletid="common_tasks_portlet_00#portletId#">
+					<div class="buttonSet" id="common_tasks_portlet_00#portletId#_buttonSet" portletid="common_tasks_portlet_00#portletId#">
+						<cfif portletStatus is 'O'>
+							<div class="minimizeButton buttonPortlet" eventaction="minimizeEvent" title="Minimize" portletid="common_tasks_portlet_00#portletId#" onClick="minimizeMaximize(this, #portletId#, #portletMaxHeight#);"></div>
+						<cfelseif portletStatus is 'C'>
+							<div class="maximizeButton buttonPortlet" eventaction="minimizeEvent" title="Maximize" portletid="common_tasks_portlet_00#portletId#" onClick="minimizeMaximize(this, #portletId#, #portletMaxHeight#);"></div>
+						</cfif>
+					</div>
+				</div>
+            </div>
+
+			<div class="portletBody" style="height: 25px; width: #portletWidth#px; #displayHeadR# overflow:hidden;" id="portletHeaderRow-#portletId#">
+            	<table border="0" cellpadding="3" cellspacing="3" width="#portletWidth#px;" id="portletHeaderRow2-#portletId#">
+	    			<thead>
+						<tr style="font-weight:bold; text-align: left;">
+					        <td width="43%">#GetString("subject")#</td>
+		                   	<td width="31%">#GetString("candidate")#</td>
+							<td width="26%">#GetString("DateAdded")#</td>
+							<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					  	</tr>
+				    </thead>
+				</table>
+			</div>
+
+		    <div class="portletBody notesDB dbContent" data-url="Dashboard_Notes.htm" style="height:#portletCotentHeight#px;#display#; text-align: left; padding-left: 10px;" id="portletBody-#portletId#">
+
+          	</div>
+            <div class="portletFooter"></div>
+        </div>
+    </div>
+	<!---End: Portlet-2 (New Notes)--->
+
+
+	<!---Start: Portlet-3 (My Top Candidates)--->
+	<cfset portletId 			= portletArray[3][1]>
+	<cfset portletMaxHeight		= portletArray[3][7]>
+	<cfset portletCotentHeight 	= portletArray[3][7] - 75>
+	<cfset portletWidth 		= portletArray[3][8]>
+
+	<cfif lang is 0>
+		<cfset portletTitle 		= portletArray[3][9]>
+		<cfset portletToolTip		= portletArray[3][9]>
+	<cfelse>
+		<cfset portletTitle 		= portletArray[3][10]>
+		<cfset portletToolTip		= portletArray[3][10]>
+	</cfif>
+
+	<cfset portletStatus        = portletArray[3][16]>
+
+	<cfif portletStatus is 'O'>
+		<cfset display 		 = "display: block;">
+		<cfset displayHeadR	 = "display: block;">
+		<cfset portletHeight = portletMaxHeight>
+	<cfelse>
+		<cfset display 		 = "display: none;">
+		<cfset displayHeadR	 = "display: none;">
+		<cfset portletHeight = "35">
+	</cfif>
+
+	<div class="portlet column" id="portlet-#portletId#" style="width: #portletWidth#px; vertical-align:top;">
+        <div class="portletContent" style="height: #portletHeight#px;" id="common_tasks_portlet_00#portletId#">
+            <div id="common_tasks_portlet_00#portletId#_header" class="portletHeader">
+                <div class="portletTitle" title="#portletTitle#" tooltip="#portletTitle#" portletid="common_tasks_portlet_00#portletId#">#portletTitle#</div>
+				<div class="portletButtons" portletid="common_tasks_portlet_00#portletId#">
+					<div class="buttonSet" id="common_tasks_portlet_00#portletId#_buttonSet" portletid="common_tasks_portlet_00#portletId#">
+						<cfif portletStatus is 'O'>
+							<div class="minimizeButton buttonPortlet" eventaction="minimizeEvent" title="Minimize" portletid="common_tasks_portlet_00#portletId#" onClick="minimizeMaximize(this, #portletId#, #portletMaxHeight#);"></div>
+						<cfelseif portletStatus is 'C'>
+							<div class="maximizeButton buttonPortlet" eventaction="minimizeEvent" title="Maximize" portletid="common_tasks_portlet_00#portletId#" onClick="minimizeMaximize(this, #portletId#, #portletMaxHeight#);"></div>
+						</cfif>
+					</div>
+				</div>
+            </div>
+
+			<div class="portletBody" style="height: 25px; overflow:hidden; #displayHeadR#" id="portletHeaderRow-#portletId#">
+            	<table border="0" cellpadding="3" cellspacing="3" width="#portletWidth#px" id="portletHeaderRow2-#portletId#">
+	    			<thead>
+						<tr style="font-weight:bold;">
+					        <td width="50%" align="left">#GetString("candidateName")#</td>
+		                   	<td width="34%" align="left">#GetString("job")#</td>
+							<td width="10%" align="left">#GetString("score")#</td>
+					        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					  	</tr>
+				    </thead>
+				</table>
+			</div>
+
+
+		    <div class="portletBody topCandidatesDB dbContent" data-url="Dashboard_Top_Candidates.htm" style="height:#portletCotentHeight#px;#display# text-align: left; padding-left: 10px;" id="portletBody-#portletId#">
+
+            </div>
+            <div class="portletFooter"></div>
+        </div>
+    </div>
+	<!---End: Portlet-3 (My Top Candidates)--->
+
+
+	<!---Start: Portlet-4 (My Saved Searches)--->
+
+
+	<cfset portletId 			= portletArray[4][1]>
+	<cfset portletMaxHeight		= portletArray[4][7]>
+	<cfset portletCotentHeight 	= portletArray[4][7] - 75>
+	<cfset portletWidth 		= portletArray[4][8]>
+
+	<cfif lang is 0>
+		<cfset portletTitle 		= portletArray[4][9]>
+		<cfset portletToolTip		= portletArray[4][9]>
+	<cfelse>
+		<cfset portletTitle 		= portletArray[4][10]>
+		<cfset portletToolTip		= portletArray[4][10]>
+	</cfif>
+
+	<cfset portletStatus        = portletArray[4][16]>
+
+	<cfif portletStatus is 'O'>
+		<cfset display 		 = "display: block;">
+		<cfset displayHeadR	 = "display: block;">
+		<cfset portletHeight = portletMaxHeight>
+	<cfelse>
+		<cfset display 		 = "display: none;">
+		<cfset displayHeadR	 = "display: none;">
+		<cfset portletHeight = "35">
+	</cfif>
+
+	<div class="portlet column" id="portlet-#portletId#" style="width: #portletWidth#px; vertical-align:top;">
+       <div class="portletContent" style="height: #portletHeight#px;" id="common_tasks_portlet_00#portletId#">
+			<div id="common_tasks_portlet_00#portletId#_header" class="portletHeader">
+                <div class="portletTitle dictionaryItem" title="#portletTitle#" tooltip="#portletToolTip#" portletid="common_tasks_portlet_00#portletId#">#portletTitle#</div>
+            	<div class="portletButtons" portletid="common_tasks_portlet_00#portletId#">
+					<div class="buttonSet" id="common_tasks_portlet_00#portletId#_buttonSet" portletid="common_tasks_portlet_00#portletId#">
+						<cfif portletStatus is 'O'>
+							<div class="minimizeButton buttonPortlet" eventaction="minimizeEvent" title="Minimize" portletid="common_tasks_portlet_00#portletId#" onClick="minimizeMaximize(this, #portletId#, #portletMaxHeight#);"></div>
+						<cfelseif portletStatus is 'C'>
+							<div class="maximizeButton buttonPortlet" eventaction="minimizeEvent" title="Maximize" portletid="common_tasks_portlet_00#portletId#" onClick="minimizeMaximize(this, #portletId#, #portletMaxHeight#);"></div>
+						</cfif>
+					</div>
+				</div>
+            </div>
+
+			<div class="portletBody" style="height: 25px; width: #portletWidth#px; #displayHeadR# overflow:hidden;" id="portletHeaderRow-#portletId#">
+            	<table border="0" cellpadding="3" cellspacing="3" width="100%" id="portletHeaderRow2-#portletId#">
+	    			<thead>
+						<tr style="font-weight:bold; text-align: left;">
+					        <td width="70%">#GetString("SearchName")#</td>
+		                   	<td width="23%">#GetString("global")#</td>
+							<td width="5%"></td>
+					  	</tr>
+				    </thead>
+				</table>
+			</div>
+
+		    <!---><div class="portletBody" style="height:100px;" id="portletBody-#portletId#">--->
+            <div class="portletBody searchesDB dbContent" data-url="Dashboard_Searches.htm" style="height:#portletCotentHeight#px;#display# text-align: left; padding-left: 10px;" id="portletBody-#portletId#">
+
+            </div>
+            <div class="portletFooter"></div>
+        </div>
+    </div>
+	<!---End: Portlet-4 (My Saved Searches)--->
+
+
+    <!---Start: Portlet-5 (Job Statuses)--->
+	<cfset portletId 			= portletArray[5][1]>
+	<cfset portletMaxHeight		= portletArray[5][7]>
+	<cfset portletCotentHeight 	= portletArray[5][7] - 50>
+	<cfset portletWidth 		= portletArray[5][8]>
+
+	<cfif lang is 0>
+		<cfset portletTitle 		= portletArray[5][9]>
+		<cfset portletToolTip		= portletArray[5][9]>
+	<cfelse>
+		<cfset portletTitle 		= portletArray[5][10]>
+		<cfset portletToolTip		= portletArray[5][10]>
+	</cfif>
+
+	<cfset portletStatus        = portletArray[5][16]>
+
+	<cfif portletStatus is 'O'>
+		<cfset display 		 = "display: block;">
+		<cfset portletHeight = portletMaxHeight>
+	<cfelse>
+		<cfset display 		 = "display: none;">
+		<cfset portletHeight = "35">
+	</cfif>
+
+	<div class="portlet column" id="portlet-#portletId#" style="width: #portletWidth#px; vertical-align:top;">
+        <div class="portletContent" style="height: #portletHeight#px;" id="common_tasks_portlet_00#portletId#">
+
+			<div id="common_tasks_portlet_00#portletId#_header" class="portletHeader">
+                <div class="portletTitle" title="#portletTitle#" tooltip="#portletToolTip#" portletid="common_tasks_portlet_00#portletId#">#portletTitle#</div>
+            	<div class="portletButtons" portletid="common_tasks_portlet_00#portletId#">
+					<div class="buttonSet" id="common_tasks_portlet_00#portletId#_buttonSet" portletid="common_tasks_portlet_00#portletId#">
+						<cfif portletStatus is 'O'>
+							<div class="minimizeButton buttonPortlet" eventaction="minimizeEvent" title="Minimize" portletid="common_tasks_portlet_00#portletId#" onClick="minimizeMaximize(this, #portletId#, #portletMaxHeight#);"></div>
+						<cfelseif portletStatus is 'C'>
+							<div class="maximizeButton buttonPortlet" eventaction="minimizeEvent" title="Maximize" portletid="common_tasks_portlet_00#portletId#" onClick="minimizeMaximize(this, #portletId#, #portletMaxHeight#);"></div>
+						</cfif>
+					</div>
+				</div>
+            </div>
+
+		    <div class="portletBody jobStatusDB dbContent" data-url="Dashboard_Job_Status.htm" style="height:#portletCotentHeight#px; #display#; padding: 0px;" id="portletBody-#portletId#" >
+
+         	</div>
+
+            <div class="portletFooter"></div>
+        </div>
+    </div>
+	<!---End: Portlet-5 (Job Statuses)--->
+
+
+	<!---Start: Portlet-6(Candidate Statuses)--->
+	<cfset portletId 			= portletArray[6][1]>
+	<cfset portletMaxHeight		= portletArray[6][7]>
+	<cfset portletCotentHeight 	= portletArray[6][7] - 50>
+	<cfset portletWidth 		= portletArray[6][8]>
+
+	<cfif lang is 0>
+		<cfset portletTitle 		= portletArray[6][9]>
+		<cfset portletToolTip		= portletArray[6][9]>
+	<cfelse>
+		<cfset portletTitle 		= portletArray[6][10]>
+		<cfset portletToolTip		= portletArray[6][10]>
+	</cfif>
+
+	<cfset portletStatus        = portletArray[6][16]>
+
+	<cfif portletStatus is 'O'>
+		<cfset display 		 = "display: block;">
+		<cfset portletHeight = portletMaxHeight>
+	<cfelse>
+		<cfset display 		 = "display: none;">
+		<cfset portletHeight = "35">
+	</cfif>
+
+	<div class="portlet column" id="portlet-#portletId#" style="width: #portletWidth#px; vertical-align:top;">
+        <div class="portletContent" style="height: #portletHeight#px;" id="common_tasks_portlet_00#portletId#">
+			<div id="common_tasks_portlet_00#portletId#_header" class="portletHeader">
+                <div class="portletTitle" title="#portletTitle#" tooltip="#portletToolTip#" portletid="common_tasks_portlet_00#portletId#">#portletTitle#</div>
+            	<div class="portletButtons" portletid="common_tasks_portlet_00#portletId#">
+					<div class="buttonSet" id="common_tasks_portlet_00#portletId#_buttonSet" portletid="common_tasks_portlet_00#portletId#">
+						<cfif portletStatus is 'O'>
+							<div class="minimizeButton buttonPortlet" eventaction="minimizeEvent" title="Minimize" portletid="common_tasks_portlet_00#portletId#" onClick="minimizeMaximize(this, #portletId#, #portletMaxHeight#);"></div>
+						<cfelseif portletStatus is 'C'>
+							<div class="maximizeButton buttonPortlet" eventaction="minimizeEvent" title="Maximize" portletid="common_tasks_portlet_00#portletId#" onClick="minimizeMaximize(this, #portletId#, #portletMaxHeight#);"></div>
+						</cfif>
+					</div>
+				</div>
+            </div>
+
+		    <div class="portletBody candidateStatusDB dbContent" data-url="Dashboard_Candidate_Status.htm" style="height:#portletCotentHeight#px;#display#; padding:0px; overlfow:hidden;" id="portletBody-#portletId#">
+
+         	</div>
+            <div class="portletFooter"></div>
+        </div>
+    </div>
+	<!---End: Portlet-6 (Candidate Statuses)--->
+
+</div>
+<!---********************************************
+*******END: MAIN CONTAINER FOR THE PORTLETS******
+*********************************************--->
+
+
+<div id="prototypes" style="display:none">
+	<div class="portletContent draggedPortlet ui-draggable" id="portletPrototype" eventsattached="true">
+
+		<div id="portletPrototype_info" class="portletInfoContent"></div>
+
+		<div id="portletPrototype_header" class="portletHeader">
+	       	<div class="portletTitle"></div>
+	    	<div id="portletPrototype_buttons" class="portletButtons"></div>
+	   	</div>
+
+		<div id="portletPrototype_body" class="portletBody"></div>
+
+		<div id="portletPrototype_footer" class="portletFooter"></div>
+	</div>
+
+	<div class="buttonSet" id="portletButtonSetPrototype">
+		<div class="closeButton buttonPortlet" eventaction="closeEvent" title="##%portletbuttonclose|portal|portletbuttonclose|Close%##"></div>
+	    <div class="maximizeButton buttonPortlet" eventaction="maximizeEvent" title="##%portletbuttonminimize|portal|portletbuttonminimize|Minimize%##"></div>
+	    <div class="minimizeButton buttonPortlet" eventaction="minimizeEvent" title="##%portletbuttonmaximize|portal|portletbuttonmaximize|Maximize%##"></div>
+	    <div class="refreshButton buttonPortlet" eventaction="refreshEvent" title="##%portletbuttonrefresh|portal|portletbuttonrefresh|Refresh%##"></div>
+	    <div class="helpButton buttonPortlet" eventaction="helpEvent" title="##%portletbuttonhelp|portal|portletbuttonhelp|Help%##"></div>
+	    <div class="editContentButton buttonPortlet" eventaction="editContentEvent" title="Edit Portlet Content"></div>
+	    <div class="detailContentButton buttonPortlet" eventaction="detailEvent" title="Details"></div>
+	 </div>
+
+	<div class="dashboardButtonSet" id="dashboardButtonSetPrototype">
+    	<div class="shortCutButton dashboardButton" eventaction="shortCutEvent" title="##%dashboardbuttonshortcut|portal|dashboardbuttonshortcut|Shortcut%##"></div>
+        <div class="editButton dashboardButton" eventaction="editEvent" title="##%dashboardbuttonedit|portal|dashboardbuttonedit|Edit%##"></div>
+        <div class="detailButton dashboardButton" eventaction="detailEvent" title="##%dashboardbuttondetail|portal|dashboardbuttondetail|Detail%##"></div>
+        <div class="infoButton dashboardButton" eventaction="infoButtonEvent" title="##%dashboardbuttoninfo|portal|dashboardbuttoninfo|Info%##"></div>
+    </div>
+</div>
+
+<br clear="all">
+<br clear="all">
+<br clear="all">
+</cfoutput>
+
+<CFINCLUDE TEMPLATE = "/ECConfig/EcIncludes/COM/PreloadNav.dbm">
+<script type="text/javascript" src="dashboard_tooltips.js"></script>
+<script type="text/javascript" src="dashboard_ajax.js"></script>
+<script type="text/javascript" src="/ECruiter/template/Scripts/dashboard.js"></script>
+
+
+</BODY>
+</HTML>
